@@ -1,16 +1,16 @@
-import { Outlet, Navigate, Link } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 const AuthLayout = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   return (
     <>
       {isAuthenticated ? (
-        <Link to={"/sign-in"} />
+        <section className="flex flex-1 justify-center items-center flex-col py-10">
+          <Outlet />
+        </section>
       ) : (
         <>
-          <section className="flex flex-1 justify-center items-center flex-col py-10">
-            <Outlet />
-          </section>
+          <Navigate to={"/sign-in"} />
         </>
       )}
     </>
