@@ -27,8 +27,9 @@ export default function App() {
           <Route path="/sign-in" element={<SigninForm />} />
           <Route path="/sign-up" element={<SignupForm />} />
         </Route>
-        <Route index element={<Home />} />
+        
         <Route element={<RootLayout />}>
+        <Route index element={<Home />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/all-users" element={<AllUsers />} />
