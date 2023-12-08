@@ -2,7 +2,7 @@ import {
   useFollowUser,
   useGetUsers,
 } from "@/lib/react-query/queriesAndMutations";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { useUserContext } from "@/context/AuthContext";
 
@@ -17,19 +17,19 @@ const Follow = () => {
 
   const [followStatus, setFollowStatus] = useState<FollowStatus>({});
   // Inside your component where you retrieve users
-  const filteredUsers = users?.filter((user) => user.$id !== currentUser.id);
+  const filteredUsers = users?.documents.filter((user) => user.$id !== currentUser.id);
   
 
   useEffect(() => {
     // Initialize follow status for users (assuming users is an array of users)
-    if (users) {
+    if (filteredUsers) {
       const initialStatus:FollowStatus = {};
-      users.forEach((user) => {
+      filteredUsers.forEach((user) => {
         initialStatus[user?.$id] = false; // Initially, no user is followed
       });
       setFollowStatus(initialStatus);
     }
-  }, [users]);
+  }, [filteredUsers]);
 
   
   const followHandler = async (following: string) => {

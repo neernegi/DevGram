@@ -425,7 +425,7 @@ export async function getComment(postId: string) {
 
 
 
-export async function followUser(follower: string, following: string,isFollowing:boolean) {
+export async function followUser(follower: string, following: string) {
   try {
     const connection = await databases.createDocument(
       appwriteConfig.databaseId,
@@ -434,7 +434,7 @@ export async function followUser(follower: string, following: string,isFollowing
       {
         follower: follower,
         following: following,
-        isFollowing:true
+       
       }
     );
     console.log("Comment created:", connection);

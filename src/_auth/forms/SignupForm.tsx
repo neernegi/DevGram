@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -26,13 +25,12 @@ import { useUserContext } from "@/context/AuthContext";
 
 const SignupForm = () => {
   const { toast } = useToast();
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const { checkAuthUser } = useUserContext();
   const { mutateAsync: createUserAccount, isPending: isCreatingUser } =
     useCreateUserAccount();
   const navigate = useNavigate();
 
-  const { mutateAsync: signInAccount, isPending: isSigningIn } =
-    useSignInAccount();
+  const { mutateAsync: signInAccount } = useSignInAccount();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidationSchema>>({
@@ -161,7 +159,7 @@ const SignupForm = () => {
           />
           <Button type="submit">
             {isCreatingUser ? (
-              <div className="flex gap-2">
+              <div className="flex gap-2 bg-slate-700">
                 <Loader /> Loading...
               </div>
             ) : (

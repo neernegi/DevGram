@@ -17,7 +17,7 @@ import {
   getRecentPosts,
   getUserById,
   getInfinitePosts,
-  getUserDetails,
+
   getUsers,
   likePost,
   savePost,
@@ -143,9 +143,11 @@ export const useFollowUser = () => {
     mutationFn: ({
       follower,
       following,
+     
     }: {
       follower: string;
       following: string;
+    
     }) => followUser(follower, following), // Pass all three arguments to followUser
     onSuccess: () => {
       queryClient.invalidateQueries({

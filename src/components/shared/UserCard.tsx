@@ -1,19 +1,17 @@
-import { Models } from "appwrite";
+
 import { Link } from "react-router-dom";
 
 import { Button } from "../ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import {
   useFollowUser,
-  useGetUserById,
+ 
   useGetUsers,
 } from "@/lib/react-query/queriesAndMutations";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
-type UserCardProps = {
-  user: Models.Document;
-};
+
 
 type FollowStatus = {
   [userId: string]: boolean;

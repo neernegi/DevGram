@@ -7,10 +7,10 @@ import { useState } from "react";
 import {
   useCommentPost,
   useGetComments,
-  useGetUsers,
+
 } from "@/lib/react-query/queriesAndMutations";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+
 import Loader from "./Loader";
 import { Separator } from "../ui/separator";
 
