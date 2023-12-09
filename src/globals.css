@@ -242,7 +242,7 @@
 
   /* User card */
   .user-card {
-    @apply flex-center justify-between flex-row w-full gap-7  mb-3 ;
+    @apply flex-center flex-col justify-between  mt-2 gap-1 ;
   }
 }
 

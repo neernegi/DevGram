@@ -1,23 +1,17 @@
-
 import { Link } from "react-router-dom";
 
 import { Button } from "../ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import {
   useFollowUser,
- 
   useGetUsers,
 } from "@/lib/react-query/queriesAndMutations";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
-
-
 type FollowStatus = {
   [userId: string]: boolean;
 };
-
-
 
 const UserCard = () => {
   const { user: currentUser } = useUserContext();
@@ -28,15 +22,15 @@ const UserCard = () => {
     isLoading: isUserLoading,
     isError: isErrorCreators,
   } = useGetUsers(10);
-  console.log(creators)
+  console.log(creators);
   const filteredUsers = creators?.documents.filter(
     (user) => user.$id !== currentUser.id
   );
-  console.log("users :",filteredUsers)
-  const following = filteredUsers?.map((flw) => flw.following)
-  console.log(following)
-  const isFollowing = following?.map((isf) =>isf.isFollowing)
-  console.log(isFollowing)
+  console.log("users :", filteredUsers);
+  const following = filteredUsers?.map((flw) => flw.following);
+  console.log(following);
+  const isFollowing = following?.map((isf) => isf.isFollowing);
+  console.log(isFollowing);
 
   const [followStatus, setFollowStatus] = useState<FollowStatus>({});
 
@@ -69,7 +63,6 @@ const UserCard = () => {
     }
   };
 
-
   // let allFollowingArrays: any = [];
   // if (Array.isArray(filteredUsers?.follower)) {
   //   allFollowingArrays = filteredUsers?.follower.map(
@@ -84,15 +77,14 @@ const UserCard = () => {
   //   );
   // }
 
-
   if (isErrorCreators) {
     return (
       <div className="flex flex-1">
         <div className="home-container">
-          <p className="body-medium text-light-1">Something bad happened</p>
+          <p className="body-medium text-dark-3">Something bad happened</p>
         </div>
         <div className="home-creators">
-          <p className="body-medium text-light-1">Something bad happened</p>
+          <p className="body-medium text-dark-3">Something bad happened</p>
         </div>
       </div>
     );
@@ -100,25 +92,31 @@ const UserCard = () => {
   return (
     <>
       <div>
-        <h3 className="h3-bold m-2 text-white">Top Creators</h3>
+        <h3 className="h3-bold text-white">Top Creators</h3>
         {isUserLoading && !creators ? (
           <Loader />
         ) : (
           <>
             {filteredUsers?.map((creator) => (
-              <div key={creator.$id} className="mt-4 border border-off-white bg-slate-200 rounded-[20px] py-4" style={{ width: "35vh" }}>
+              <div
+                key={creator.$id}
+                className="mt-4 border flex-center gap-4 flex-row border-off-white bg-slate-200 rounded-[20px] py-4"
+                style={{ width: "35vh" }}
+              >
                 <Link to={`/profile/${creator.$id}`} className="user-card ">
                   <img
                     src={
                       creator.imageUrl ||
                       "/assets/icons/profile-placeholder.svg"
                     }
-                 
                     alt="creator"
-                    className="rounded-full w-16 h-16"
+                    className="rounded-full w-20 h-20 cursor-pointer"
                   />
+                  </Link>
+              
 
-                  <div className="flex-center flex-col gap-1">
+                <div className="flex-center flex-col gap-1">
+                  <Link to={`/profile/${creator.$id}`} className="user-card ">
                     <p
                       className="base-medium  text-black text-center line-clamp-1"
                       style={{ fontSize: "1.2rem" }}
@@ -131,17 +129,16 @@ const UserCard = () => {
                     >
                       @{creator.username}
                     </p>
-                  </div>
-                </Link>
-                <Button
-                  onClick={() => followHandler(creator.$id)}
-                  type="button"
-                  size="sm"
-                  className="bg-slate-800 text-white lg:ml-48"
-               
-                >
-                  {followStatus[creator.$id] ? "Following" : "Follow"}
-                </Button>
+                  </Link>
+                  <Button
+                    onClick={() => followHandler(creator.$id)}
+                    type="button"
+                    size="lg"
+                    className="bg-slate-800 text-lg text-white mt-1"
+                  >
+                    {followStatus[creator.$id] ? "Following" : "Follow"}
+                  </Button>
+                </div>
               </div>
             ))}
           </>
